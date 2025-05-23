@@ -1,8 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 * {
-  transition: all 0.3s linear;
+  transition:
+    background-color 0.03s ease,
+    color 0.03s ease,
+    transform 0.3s linear,
+    translate 0.3s linear,
+    rotate 0.3s linear;
 }
 
 @theme {
