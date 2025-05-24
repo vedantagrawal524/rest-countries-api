@@ -1,14 +1,8 @@
-import { useState, useEffect } from "react";
 import Country from "./Country";
+import { useCountriesContext } from "../hooks/useCountriesContext";
 
 export default function Countries() {
-  const [countries, setCountries] = useState([]);
-
-  useEffect(() => {
-    fetch("/data.json")
-      .then((res) => res.json())
-      .then((data) => setCountries(data));
-  }, []);
+  const { countries } = useCountriesContext();
 
   return (
     <div className="xs:grid-cols-2 grid w-full grid-cols-1 gap-14 px-6 lg:grid-cols-3 xl:grid-cols-4">

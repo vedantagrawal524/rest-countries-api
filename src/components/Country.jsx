@@ -16,7 +16,7 @@ export default function Country(props) {
           <li className="w-full leading-5">
             Poplation:{" "}
             <span className="text-[0.95rem] font-[300] dark:opacity-90">
-              {props.country.population}
+              {props.country.population.toLocaleString()}
             </span>
           </li>
 

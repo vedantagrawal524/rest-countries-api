@@ -1,6 +1,14 @@
 import { useState } from "react";
+import { useCountriesContext } from "../hooks/useCountriesContext";
 
 export default function MenuBar() {
+  const {
+    filterByRegion,
+    region,
+    regionsList,
+    searchQuery,
+    updateSearchQuery,
+  } = useCountriesContext();
   const [showFilterMenu, setShowFilterMenu] = useState(false);
 
   const toggleFilterMenu = () => {
@@ -12,6 +20,8 @@ export default function MenuBar() {
       <fieldset className="relative flex w-full drop-shadow-sm">
         <input
           type="text"
+          value={searchQuery}
+          onChange={(e) => updateSearchQuery(e.target.value)}
           name="searchBar"
           id="searchBar"
           className="bg-lm-ele-white dark:bg-dm-ele-blue-900 dark:text-dm-text-white text-lm-input-grey-400 placeholder:text-lm-input-grey-400/60 outline-lm-input-grey-400 dark:placeholder:text-dm-text-white/60 h-[3rem] w-full max-w-[22rem] rounded-[0.4rem] px-[3rem] py-[1rem] text-[0.95rem] font-[600] placeholder:text-[0.85rem] placeholder:font-[600]"
@@ -44,13 +54,13 @@ export default function MenuBar() {
         </svg>
       </fieldset>
 
-      <div className="bg-lm-ele-white dark:bg-dm-ele-blue-900 outline-lm-input-grey-400 relative flex w-full max-w-[12rem] items-center rounded-[0.4rem] drop-shadow-sm">
+      <div className="bg-lm-ele-white dark:bg-dm-ele-blue-900 outline-lm-input-grey-400 relative flex w-full max-w-[12rem] items-center rounded-[0.4rem] drop-shadow-sm hover:outline-2">
         <button
           type="button"
           onClick={toggleFilterMenu}
           className="text-lm-text-grey-950 dark:text-dm-text-white/90 group flex h-[3rem] w-full cursor-pointer flex-row items-center justify-between rounded-[0.4rem] px-[1.2rem] py-[1rem] text-[0.85rem] font-[500]"
         >
-          Filter by Region
+          {region}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="ionicon"
@@ -68,20 +78,24 @@ export default function MenuBar() {
           </svg>
         </button>
 
-        {showFilterMenu ? (
-          <div className="bg-lm-ele-white dark:bg-dm-ele-blue-900 absolute top-[110%] left-0 z-20 h-fit w-full rounded-[0.3rem] px-[1.2rem] py-[1rem] shadow-lg">
-            <ul className="text-lm-text-grey-950 dark:text-dm-text-white flex w-fit flex-col justify-center gap-1 text-[0.85rem] font-[600]">
-              <li className="hover:cursor-pointer">Africa</li>
-              <li className="hover:cursor-pointer">America</li>
-              <li className="hover:cursor-pointer">Asia</li>
-              <li className="hover:cursor-pointer">Europe</li>
-              <li className="hover:cursor-pointer">Oceania</li>
-              <li className="hover:cursor-pointer">All Regions</li>
-            </ul>
-          </div>
-        ) : (
-          ""
-        )}
+        <div
+          className={`bg-lm-ele-white dark:bg-dm-ele-blue-900 absolute top-[110%] left-0 z-20 h-fit w-full rounded-[0.3rem] px-[1.2rem] py-[1rem] shadow-lg transition-[opacity] duration-300 ease-in-out ${showFilterMenu ? "opacity-100" : "hidden opacity-0"}`}
+        >
+          <ul className="text-lm-text-grey-950 dark:text-dm-text-white flex w-fit flex-col justify-center gap-1 text-[0.85rem] font-[600]">
+            {regionsList.map((regionName) => (
+              <li
+                key={regionName}
+                className={`hover:cursor-pointer ${regionName === region ? "font-[800]" : "opacity-80"}`}
+                onClick={() => {
+                  filterByRegion(regionName);
+                  setShowFilterMenu(false);
+                }}
+              >
+                {regionName}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
