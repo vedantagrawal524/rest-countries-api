@@ -9,7 +9,7 @@ export default function DetailsMain(props) {
       <button
         type="button"
         onClick={() => navigate(-1)}
-        className="text-lm-text-grey-950 dark:text-dm-text-white bg-lm-ele-white dark:bg-dm-ele-blue-900 mt-4 flex w-fit cursor-pointer flex-row items-center justify-center gap-1 rounded-[0.4rem] px-8 py-1.5 text-[0.85rem] font-[500] drop-shadow-sm"
+        className="text-lm-text-grey-950 dark:text-dm-text-white bg-lm-ele-white dark:bg-dm-ele-blue-900 mt-4 flex w-fit cursor-pointer flex-row items-center justify-center gap-1 rounded-[0.4rem] px-8 py-1.5 text-[0.85rem] font-[500] drop-shadow-sm hover:opacity-70"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -60,21 +60,27 @@ export default function DetailsMain(props) {
               />
               <CountryDetailProp
                 property="Capital"
-                value={props.country.capital}
+                value={
+                  props.country.capital?.length
+                    ? props.country.capital
+                    : props.country.name
+                }
               />
             </div>
             <div className="flex flex-col gap-1.5">
               <CountryDetailProp
                 property="Top Level Domain"
                 value={props.country.topLevelDomain}
-              />{" "}
+              />
               <CountryDetailProp
                 property="Currencies"
-                value={props.country.currencies.map((curr) => curr.name)}
+                value={(props.country.currencies ?? []).map(
+                  (curr) => curr.name,
+                )}
               />
               <CountryDetailProp
                 property="Languages"
-                value={props.country.languages.map((lang) => lang.name)}
+                value={(props.country.languages ?? []).map((lang) => lang.name)}
               />
             </div>
           </div>

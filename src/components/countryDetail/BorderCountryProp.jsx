@@ -21,7 +21,7 @@ export default function BorderCountryProp(props) {
                 country: countriesData.find((c) => c.alpha3Code === code),
               }}
             >
-              <div className="bg-lm-ele-white dark:bg-dm-ele-blue-900 flex h-[1.7rem] min-w-[6rem] cursor-pointer items-center justify-center self-center rounded-[0.3rem] px-6 py-0.5 text-[0.95rem] font-[300] drop-shadow-sm dark:opacity-90">
+              <div className="bg-lm-ele-white dark:bg-dm-ele-blue-900 flex h-[1.7rem] min-w-[6rem] cursor-pointer items-center justify-center self-center rounded-[0.3rem] px-6 py-0.5 text-[0.95rem] font-[300] drop-shadow-sm hover:opacity-70 dark:opacity-90">
                 {borderCountryName || code}
               </div>
             </Link>

@@ -86,7 +86,7 @@ export default function MenuBar() {
             {regionsList.map((regionName) => (
               <li
                 key={regionName}
-                className={`hover:cursor-pointer ${regionName === region ? "font-[800]" : "opacity-80"}`}
+                className={`hover:cursor-pointer hover:font-[800] ${regionName === region ? "font-[800]" : "opacity-80"}`}
                 onClick={() => {
                   filterByRegion(regionName);
                   setShowFilterMenu(false);
