@@ -9,19 +9,24 @@ import CountryDetail from "./components/countryDetail/CountryDetail.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <CountriesContextProvider>
+        <App />
+      </CountriesContextProvider>
+    ),
   },
-
   {
     path: "/:countryName",
-    element: <CountryDetail />,
+    element: (
+      <CountriesContextProvider>
+        <CountryDetail />
+      </CountriesContextProvider>
+    ),
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <CountriesContextProvider>
-      <RouterProvider router={router} />
-    </CountriesContextProvider>
+    <RouterProvider router={router} />
   </StrictMode>,
 );

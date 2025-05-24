@@ -1,8 +1,11 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export const CountriesContext = createContext();
 
 export default function CountriesContextProvider({ children }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [countriesData, setCountriesData] = useState([]);
   const [countries, setCountries] = useState([]);
 
@@ -16,15 +19,15 @@ export default function CountriesContextProvider({ children }) {
     "All Regions",
   ]);
 
-  const [region, setRegion] = useState(() => {
-    return sessionStorage.getItem("region") || "All Regions";
-  });
+  // Get from URL or fallback to sessionStorage
+  const region =
+    searchParams.get("region") ||
+    sessionStorage.getItem("region") ||
+    "All Regions";
+  const searchQuery =
+    searchParams.get("search") || sessionStorage.getItem("searchQuery") || "";
 
-  const [searchQuery, setSearchQuery] = useState(() => {
-    return sessionStorage.getItem("searchQuery") || "";
-  });
-
-  // Load data from sessionStorage or fetch
+  // Load data
   useEffect(() => {
     const sessionData = sessionStorage.getItem("countriesData");
 
@@ -43,16 +46,7 @@ export default function CountriesContextProvider({ children }) {
     }
   }, []);
 
-  // Update filters in sessionStorage
-  useEffect(() => {
-    sessionStorage.setItem("region", region);
-  }, [region]);
-
-  useEffect(() => {
-    sessionStorage.setItem("searchQuery", searchQuery);
-  }, [searchQuery]);
-
-  // Apply filter logic
+  // Filtering
   useEffect(() => {
     let filtered = countriesData;
 
@@ -69,17 +63,36 @@ export default function CountriesContextProvider({ children }) {
     setCountries(filtered);
   }, [region, searchQuery, countriesData]);
 
+  // Update region
   function filterByRegion(regionName) {
-    setRegion(regionName);
+    const newParams = new URLSearchParams(searchParams);
+    if (regionName === "All Regions") {
+      newParams.delete("region");
+      sessionStorage.removeItem("region");
+    } else {
+      newParams.set("region", regionName);
+      sessionStorage.setItem("region", regionName);
+    }
+    setSearchParams(newParams);
   }
 
+  // Update search query
   function updateSearchQuery(query) {
-    setSearchQuery(query);
+    const newParams = new URLSearchParams(searchParams);
+    const trimmed = query.trim();
+
+    if (trimmed === "") {
+      newParams.delete("search");
+      sessionStorage.removeItem("searchQuery");
+    } else {
+      newParams.set("search", trimmed);
+      sessionStorage.setItem("searchQuery", trimmed);
+    }
+    setSearchParams(newParams);
   }
 
   function resetFilter() {
-    setRegion("All Regions");
-    setSearchQuery("");
+    setSearchParams({});
     sessionStorage.removeItem("region");
     sessionStorage.removeItem("searchQuery");
   }
