@@ -1,3 +1,5 @@
+import CountryDetailProp from "./CountryDetailProp";
+
 export default function Country(props) {
   return (
     <div className="bg-lm-ele-white dark:bg-dm-ele-blue-900 flex h-[22rem] w-full max-w-[20rem] flex-col place-self-center rounded-[0.4rem] shadow-md">
@@ -12,27 +14,13 @@ export default function Country(props) {
           {props.country.name}
         </h2>
 
-        <ul className="flex w-full flex-col gap-1 text-[1rem] font-[600]">
-          <li className="w-full leading-5">
-            Poplation:{" "}
-            <span className="text-[0.95rem] font-[300] dark:opacity-90">
-              {props.country.population.toLocaleString()}
-            </span>
-          </li>
-
-          <li className="w-full leading-5">
-            Region:{" "}
-            <span className="text-[0.95rem] font-[300] dark:opacity-90">
-              {props.country.region}
-            </span>
-          </li>
-
-          <li className="w-full leading-5">
-            Capital:{" "}
-            <span className="text-[0.95rem] font-[300] dark:opacity-90">
-              {props.country.capital}
-            </span>
-          </li>
+        <ul className="flex w-full flex-col gap-1">
+          <CountryDetailProp
+            property="Poplation"
+            value={props.country.population.toLocaleString()}
+          />
+          <CountryDetailProp property="Region" value={props.country.region} />
+          <CountryDetailProp property="Capital" value={props.country.capital} />
         </ul>
       </div>
     </div>

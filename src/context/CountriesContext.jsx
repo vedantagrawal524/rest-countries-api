@@ -87,6 +87,7 @@ export default function CountriesContextProvider({ children }) {
   return (
     <CountriesContext.Provider
       value={{
+        countriesData,
         countries,
         filterByRegion,
         updateSearchQuery,
