@@ -1,4 +1,4 @@
-import CountryDetailProp from "./CountryDetailProp";
+import CountryDetailProp from "../countryDetail/CountryDetailProp";
 
 export default function Country(props) {
   return (

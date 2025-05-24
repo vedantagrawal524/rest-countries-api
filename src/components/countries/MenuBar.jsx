@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCountriesContext } from "../hooks/useCountriesContext";
+import { useCountriesContext } from "../../hooks/useCountriesContext";
 
 export default function MenuBar() {
   const {
@@ -19,6 +19,7 @@ export default function MenuBar() {
     <div className="xs:flex-row xs:justify-between xs:items-center flex w-full flex-col justify-center gap-7">
       <fieldset className="relative flex w-full drop-shadow-sm">
         <input
+          autoComplete="true"
           type="text"
           value={searchQuery}
           onChange={(e) => updateSearchQuery(e.target.value)}
