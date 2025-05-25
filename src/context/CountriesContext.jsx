@@ -19,6 +19,21 @@ export default function CountriesContextProvider({ children }) {
     "All Regions",
   ]);
 
+  const initialVisibleCount =
+    Number(sessionStorage.getItem("visibleCount")) || 20;
+
+  const [visibleCount, setVisibleCount] = useState(initialVisibleCount);
+
+  function loadMoreCountries() {
+    setVisibleCount((prev) => {
+      const newCount = prev + 20;
+      sessionStorage.setItem("visibleCount", newCount);
+      return newCount;
+    });
+  }
+
+  const visibleCountries = countries.slice(0, visibleCount);
+
   // Get from URL or fallback to sessionStorage
   const region =
     searchParams.get("region") ||
@@ -95,19 +110,23 @@ export default function CountriesContextProvider({ children }) {
     setSearchParams({});
     sessionStorage.removeItem("region");
     sessionStorage.removeItem("searchQuery");
+    sessionStorage.setItem("visibleCount", 20);
+    setVisibleCount(20);
   }
 
   return (
     <CountriesContext.Provider
       value={{
         countriesData,
-        countries,
+        countries: visibleCountries,
         filterByRegion,
         updateSearchQuery,
         region,
         regionsList,
         searchQuery,
         resetFilter,
+        loadMoreCountries,
+        hasMore: countries.length > visibleCount,
       }}
     >
       {children}

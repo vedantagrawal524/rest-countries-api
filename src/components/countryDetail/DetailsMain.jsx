@@ -1,33 +1,11 @@
 import CountryDetailProp from "./CountryDetailProp";
 import BorderCountryProp from "./BorderCountryProp";
-import { useNavigate } from "react-router-dom";
+import BackButton from "./BackButton";
 
 export default function DetailsMain(props) {
-  const navigate = useNavigate();
   return (
     <main className="xxs:px-7 xs:px-8 flex w-full flex-col gap-14 px-5 py-5 pb-12 md:px-10 lg:px-12 xl:px-14">
-      <button
-        type="button"
-        onClick={() => navigate(-1)}
-        className="text-lm-text-grey-950 dark:text-dm-text-white bg-lm-ele-white dark:bg-dm-ele-blue-900 mt-4 flex w-fit cursor-pointer flex-row items-center justify-center gap-1 rounded-[0.4rem] px-8 py-1.5 text-[0.85rem] font-[500] drop-shadow-sm hover:opacity-70"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="ionicon"
-          viewBox="0 0 512 512"
-          className="h-auto w-4"
-        >
-          <path
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="50"
-            d="M244 400L100 256l144-144M120 256h292"
-          />
-        </svg>
-        Back
-      </button>
+      <BackButton />
 
       <article className="xs:gap-16 flex w-full flex-col gap-10 px-4 lg:flex-row lg:justify-center xl:gap-30 xl:px-6">
         <img
