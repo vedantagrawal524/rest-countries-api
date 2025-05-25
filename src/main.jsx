@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CountriesContextProvider from "./context/CountriesContext";
 
 import CountryDetail from "./components/countryDetail/CountryDetail.jsx";
+import NotFoundPage from "./components/NotFoundPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         <CountryDetail />
       </CountriesContextProvider>
     ),
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 
