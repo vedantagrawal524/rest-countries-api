@@ -42,6 +42,7 @@ export default function CountriesContextProvider({ children }) {
   const searchQuery =
     searchParams.get("search") || sessionStorage.getItem("searchQuery") || "";
 
+  const env = import.meta.env;
   // Load data
   useEffect(() => {
     const sessionData = sessionStorage.getItem("countriesData");
@@ -51,12 +52,18 @@ export default function CountriesContextProvider({ children }) {
       setCountriesData(parsedData);
       setCountries(parsedData);
     } else {
-      fetch("/data.json")
-        .then((res) => res.json())
+      fetch(env.VITE_API_BASE_URL)
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to fetch countries");
+          return res.json();
+        })
         .then((data) => {
           setCountriesData(data);
           setCountries(data);
           sessionStorage.setItem("countriesData", JSON.stringify(data));
+        })
+        .catch((err) => {
+          console.error("Error fetching countries from backend:", err);
         });
     }
   }, []);

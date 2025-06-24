@@ -10,7 +10,8 @@ This is a solution to the [REST Countries API with color theme switcher challeng
   - [Features](#features)  
   - [Screenshots](#screenshots)  
   - [Live Links](#live-links)  
-  - [Built With](#built-with)  
+  - [Built With](#built-with)
+  - [Backend Features](#backend-features)
 - [Author](#author)
 
 ---
@@ -36,13 +37,13 @@ This application displays country data fetched from the REST Countries API. User
 
 ### Screenshots
 
-![All Countries View - Light Mode](./public/design/desktop-design-home-light.jpg)  
+![All Countries View - Light Mode](./client/public/design/desktop-design-home-light.jpg)  
 
-![All Countries View - Dark Mode](./public/design/mobile-design-home-dark.jpg)  
+![All Countries View - Dark Mode](./client/public/design/mobile-design-home-dark.jpg)  
 
-![Country Details- Light Mode](./public/design/mobile-design-detail-light.jpg)
+![Country Details- Light Mode](./client/public/design/mobile-design-detail-light.jpg)
 
-![Country Details- Dark Mode](./public/design/desktop-design-detail-dark.jpg)
+![Country Details- Dark Mode](./client/public/design/desktop-design-detail-dark.jpg)
 
 ---
 
@@ -63,7 +64,21 @@ This application displays country data fetched from the REST Countries API. User
 - REST Countries API  
 - Mobile-first responsive layout  
 - Dark/Light Theme Toggle  
-- Vercel for deployment
+- [Vercel](https://vercel.com/) for deployment
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- [Render](https://render.com/) for Server deployment  
+
+---
+
+### Backend Features
+
+- Created an **Express.js server** to handle Countries Data.
+- Countries Data are stored securely in a **MongoDB database**.
+- Used **Mongoose** to define the Countries Data schema and perform validations.
+- Hosted backend using **Render**.
 
 ---
 
